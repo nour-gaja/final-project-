@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        
+        .left-image {
+            width: 50vw;  
+            height: 100vh; 
+            object-fit: cover;  
+        
+        }
+       
+        .form-container {
+            height: 100vh; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .form ,h2  {
+            padding-left: 150px;
+        }
+        .btn{
+            margin-left:150px ;
+            margin-top: 40px;
+        }
+        form {
+            width: 600px;
+            font-size: xx-large;
+        }
+        h2{
+            margin-bottom: 50px ;
+            font-size: 50px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: brown;
+        }
+        #email , #password, #firstName, #lastName ,#phone{
+            margin: 8px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container-fluid p-0">
+        <div class="row no-gutters">
+            <div class="col-md-6 p-0">
+                <img src="image.png" alt="Image" class="left-image">
+            </div>
+            <div class="col-md-6 p-0 form-container">
+                <div class="container">
+                    <h2>Create Your Account</h2>
+                    <form id="signupForm" onsubmit="return validateForm(event)">
+                        <div class="form">
+                            <label for="email">Email address:</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+                        </div>
+                        <div class="form">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control" id="password" placeholder="Password" required>
+                            <div class="invalid-feedback">Password must contain at least one letter and one number.</div>
+                        </div>
+                        <div class="form">
+                            <label for="firstName">First Name:</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="Enter first name" required>
+                        </div>
+                        <div class="form">
+                            <label for="lastName">Last Name:</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Enter last name" required>
+                        </div>
+                        <div class="form">
+                            <label for="phone">Phone Number:</label>
+                            <input type="tel" class="form-control" id="phone" placeholder="Enter phone number" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+       
+        function validatePassword(password) {
+            const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;  
+            return regex.test(password);
+        }
+
+ 
+        function validatePhone() {
+            const number = document.getElementById("phone").value; 
+        
+            for (let i = 0; i < number.length; i++) {
+                if (isNaN(number[i])) {
+                    alert("Invalid number. Please enter digits only.");
+                    return false; 
+                }
+            }
+          
+            if (number.length !== 8) {
+                alert("Phone number must be 8 digits long.");
+                return false; 
+            }
+            return true;  
+        }
+
+        function validateForm(event) {
+            const password = document.getElementById('password').value;  
+
+            
+            if (!validatePassword(password)) {
+                event.preventDefault(); 
+                alert("Password must contain at least one letter and one number, and be at least 6 characters long.");
+                return false;
+            }
+
+            if (!validatePhone()) {
+                event.preventDefault();  
+                return false;
+            }
+
+            return true;  
+        }
+    </script>
+</body>
+
+
+
